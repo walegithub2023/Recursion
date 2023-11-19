@@ -1,0 +1,62 @@
+/*
+An alorithm to test if a word is a palindrome. 
+A word is a palindrome if only if it can be read from left to right or from right to left: gag; kayak; php; radar;....:
+
+*/
+
+ALGORITHM recursion
+
+VAR
+   
+BEGIN
+   
+// Function to count the length of a word
+FUNCTION countCharacters(VAR word:STRING[] ) : INTEGER
+VAR
+    i, wordLength : INTEGER;
+BEGIN
+    
+    FOR i FROM 0 TO word.length STEP 1  DO
+        wordLength := wordLength + 1;
+    END_FOR
+
+    RETURN wordLength;
+END
+
+// Function to trim a word by removing the first and last characters
+FUNCTION trimWord(word:STRING ) : STRING
+VAR
+    word, trimmedWord: STRING[];
+BEGIN
+
+    trimmedWord := word[] - word[0];                    // Remove the first element
+    trimmedWord := trimmedWord - word[word.length - 1]; // Remove the last element
+
+    RETURN trimmedWord;
+END
+
+// Function to check Palindrome
+FUNCTION check_palindrome(word: STRING) : STRING
+VAR
+    word: STRING;
+    m: INTEGER;
+    firstChar, lastChar: STRING;
+BEGIN
+
+    m := countCharacters(word);                         // Count lenght of the word
+    firstChar := word[0];                               // First Character
+    lastChar := m - 1;                                  // Last Character
+
+    IF (m <= 1) THEN                                     // If the word is not less than 2 characters
+        RETURN true;
+    ELSE
+        IF (firstChar = lastChar) THEN                     //Check if first and last characters are equal
+            RETURN check_palindrome(trimWord(word));        // Repeeat process
+        ELSE
+            RETURN false;
+        END_IF
+    END_IF
+
+END
+
+END
